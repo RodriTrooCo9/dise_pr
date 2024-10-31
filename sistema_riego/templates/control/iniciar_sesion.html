@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Responsivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <style>
+        body {
+            background-image: url("{% static 'img/fotoLogin.jpg' %}"); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Mayor transparencia */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            backdrop-filter: blur(10px); /* Efecto de desenfoque detrás del contenedor */
+        }
+        .form-label {
+            font-weight: bold;
+            color: #fff; /* Texto blanco */
+        }
+        .login-container h3 {
+            color: #fff; /* Título blanco */
+        }
+        .form-check-label, .forgot-password, p {
+            color: #fff; /* Texto blanco */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h3 class="text-center mb-4">Login</h3>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="nombre_usuario" class="form-label">Nombre del Usuario:</label>
+                <input type="text" id="nombre_usuario" name="nombre_usuario" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="recordar_contrasena">
+                <label class="form-check-label" for="recordar_contrasena">Recordar Contraseña</label>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Iniciar</button>
+            </div>
+        </form>
+                <p class="text-center mt-3 forgot-password">
+            <a href="{% url 'forgot_password' %}" class="text-light">¿Olvidaste tu contraseña?</a>
+        </p>
+        <p class="text-center mt-3">
+            <a href="{% url 'register' %}" class="text-light">¿No tienes cuenta? Regístrate aquí.</a>
+        </p>
+        <p class="text-center mt-3">Código de Arduino: {{ codigo_serie }}</p>
+    </div>
+
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
